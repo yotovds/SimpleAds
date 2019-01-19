@@ -104,6 +104,7 @@ namespace SimpleAds.Web
                 await roleManager.CreateAsync(new IdentityRole("User"));
                 var admin = new SimpleAdsUser { UserName = "admin"};
                 await userManager.CreateAsync(admin, "admin");
+                await userManager.AddToRoleAsync(admin, "Admin");
             }
             
             //Assign Admin role to the main User here we have given our newly registered 
