@@ -1,4 +1,6 @@
 ﻿@using SimpleAds.Services.ViewModels.Ads
+@using SimpleAds.Services.ViewModels.Enums
+
 @model CreateAdInputModel
 
 @{
@@ -16,7 +18,7 @@
         </div>
         <div class="form-group">
             <label asp-for="Content"></label>
-            <input asp-for="Content" class="form-control" />
+            <textarea asp-for="Content" class="form-control"></textarea>
             <span asp-validation-for="Content" class="text-danger"></span>
         </div>
         <div class="form-group">
@@ -30,7 +32,7 @@
             <span asp-validation-for="Image" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <select asp-for="ExpirationAfter" class="form-control" asp-items="@new  SelectList(Enum.GetNames(typeof(CreateAdInputModel.Expiration)))">
+            <select asp-for="ExpirationAfter" class="form-control" asp-items="@new  SelectList(Enum.GetNames(typeof(Expiration)))">
                 <option selected disabled>Expiration after</option>
             </select>
         </div>
@@ -40,3 +42,6 @@
     </form>
 </div>
 
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

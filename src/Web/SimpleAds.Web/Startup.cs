@@ -14,6 +14,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SimpleAds.Data.Models;
 using SimpleAds.Data;
+using SimpleAds.Services.ViewModels.Ads;
+using SimpleAds.Services;
+using SimpleAds.Services.Contracs;
 
 namespace SimpleAds.Web
 {
@@ -56,9 +59,14 @@ namespace SimpleAds.Web
 
             services.AddAntiforgery();
 
-            services.AddAutoMapper();
+            services.AddAutoMapper(configuration =>
+            {
+                configuration.CreateMap<CreateAdInputModel, PendingAd>();
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddScoped<IAdsService, AdsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -12,6 +12,10 @@ namespace SimpleAds.Data
         {
         }
 
+        public DbSet<PendingAd> PendingAds { get; set; }
+
+        public DbSet<Ad> Ads { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

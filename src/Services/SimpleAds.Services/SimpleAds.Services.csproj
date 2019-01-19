@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Data\SimpleAds.Data\SimpleAds.Data.csproj" />
+    <ProjectReference Include="..\SimpleAds.Services.ViewModels\SimpleAds.Services.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

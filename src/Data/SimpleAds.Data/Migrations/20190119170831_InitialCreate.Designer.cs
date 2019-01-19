@@ -10,7 +10,7 @@ using SimpleAds.Data;
 namespace SimpleAds.Data.Migrations
 {
     [DbContext(typeof(SimpleAdsDbContext))]
-    [Migration("20190119101908_InitialCreate")]
+    [Migration("20190119170831_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -87,11 +87,9 @@ namespace SimpleAds.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                    b.Property<string>("LoginProvider");
 
-                    b.Property<string>("ProviderKey")
-                        .HasMaxLength(128);
+                    b.Property<string>("ProviderKey");
 
                     b.Property<string>("ProviderDisplayName");
 
@@ -122,17 +120,69 @@ namespace SimpleAds.Data.Migrations
                 {
                     b.Property<string>("UserId");
 
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                    b.Property<string>("LoginProvider");
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(128);
+                    b.Property<string>("Name");
 
                     b.Property<string>("Value");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("SimpleAds.Data.Models.Ad", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AdCreatorId")
+                        .IsRequired();
+
+                    b.Property<string>("Category");
+
+                    b.Property<string>("Content");
+
+                    b.Property<DateTime>("ExpirationOn");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired();
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AdCreatorId");
+
+                    b.ToTable("Ads");
+                });
+
+            modelBuilder.Entity("SimpleAds.Data.Models.PendingAd", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AdCreatorId")
+                        .IsRequired();
+
+                    b.Property<string>("Category");
+
+                    b.Property<string>("Content");
+
+                    b.Property<int>("ExpirationAfter");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired();
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AdCreatorId");
+
+                    b.ToTable("PendingAds");
                 });
 
             modelBuilder.Entity("SimpleAds.Data.Models.SimpleAdsUser", b =>
@@ -228,6 +278,22 @@ namespace SimpleAds.Data.Migrations
                     b.HasOne("SimpleAds.Data.Models.SimpleAdsUser")
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("SimpleAds.Data.Models.Ad", b =>
+                {
+                    b.HasOne("SimpleAds.Data.Models.SimpleAdsUser", "AdCreator")
+                        .WithMany()
+                        .HasForeignKey("AdCreatorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("SimpleAds.Data.Models.PendingAd", b =>
+                {
+                    b.HasOne("SimpleAds.Data.Models.SimpleAdsUser", "AdCreator")
+                        .WithMany()
+                        .HasForeignKey("AdCreatorId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

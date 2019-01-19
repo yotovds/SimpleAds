@@ -8,4 +8,8 @@
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="2.1.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Services\SimpleAds.Services.ViewModels\SimpleAds.Services.ViewModels.csproj" />
+  </ItemGroup>
+
 </Project>
