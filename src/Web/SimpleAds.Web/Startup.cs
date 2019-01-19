@@ -12,7 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SimpleAds.Web.Models;
-using SimpleAds.Web.Areas.Identity.Data;
+using SimpleAds.Data.Models;
+using SimpleAds.Data;
 
 namespace SimpleAds.Web
 {

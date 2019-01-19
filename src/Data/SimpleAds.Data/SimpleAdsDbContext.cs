@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SimpleAds.Web.Areas.Identity.Data;
+using SimpleAds.Data.Models;
+using System;
 
-namespace SimpleAds.Web.Models
+namespace SimpleAds.Data
 {
     public class SimpleAdsDbContext : IdentityDbContext<SimpleAdsUser>
     {

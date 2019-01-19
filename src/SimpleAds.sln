@@ -7,6 +7,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{C61EFA13-3EE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleAds.Web", "Web\SimpleAds.Web\SimpleAds.Web.csproj", "{D71728FD-0245-4910-B9B4-ED02B659DF4A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{0E17BF07-25A6-44F6-AE53-45DB53F04D9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleAds.Data", "Data\SimpleAds.Data\SimpleAds.Data.csproj", "{D8D86C22-CC55-4700-92CC-4258D9071E83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleAds.Data.Models", "Data\SimpleAds.Data.Models\SimpleAds.Data.Models.csproj", "{60265799-33B9-41AA-BCE2-08DA939CB13B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,12 +23,22 @@ Global
 		{D71728FD-0245-4910-B9B4-ED02B659DF4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D71728FD-0245-4910-B9B4-ED02B659DF4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D71728FD-0245-4910-B9B4-ED02B659DF4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8D86C22-CC55-4700-92CC-4258D9071E83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8D86C22-CC55-4700-92CC-4258D9071E83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8D86C22-CC55-4700-92CC-4258D9071E83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8D86C22-CC55-4700-92CC-4258D9071E83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60265799-33B9-41AA-BCE2-08DA939CB13B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60265799-33B9-41AA-BCE2-08DA939CB13B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60265799-33B9-41AA-BCE2-08DA939CB13B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60265799-33B9-41AA-BCE2-08DA939CB13B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D71728FD-0245-4910-B9B4-ED02B659DF4A} = {C61EFA13-3EE3-4CF4-BD32-A90ED1575ED0}
+		{D8D86C22-CC55-4700-92CC-4258D9071E83} = {0E17BF07-25A6-44F6-AE53-45DB53F04D9C}
+		{60265799-33B9-41AA-BCE2-08DA939CB13B} = {0E17BF07-25A6-44F6-AE53-45DB53F04D9C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1F02C883-9DA6-42A7-B66F-A003439E7327}

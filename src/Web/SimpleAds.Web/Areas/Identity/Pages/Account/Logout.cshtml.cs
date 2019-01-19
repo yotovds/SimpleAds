@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using SimpleAds.Web.Areas.Identity.Data;
+using SimpleAds.Data.Models;
 
 namespace SimpleAds.Web.Areas.Identity.Pages.Account
 {
