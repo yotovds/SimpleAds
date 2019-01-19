@@ -40,14 +40,27 @@ namespace SimpleAds.Web
                     options.UseSqlServer(
                         this.Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<SimpleAdsUser>()
+            services.AddIdentity<SimpleAdsUser, IdentityRole>()
                 .AddEntityFrameworkStores<SimpleAdsDbContext>();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.SignIn.RequireConfirmedEmail = false;
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 3;
+                options.Password.RequiredUniqueChars = 0;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+            });
+
+            services.AddAntiforgery();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider services)
         {
             if (env.IsDevelopment())
             {
@@ -72,6 +85,32 @@ namespace SimpleAds.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            CreateUserRoles(services).GetAwaiter().GetResult();
+        }
+
+        private async Task CreateUserRoles(IServiceProvider serviceProvider)
+        {
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var userManager = serviceProvider.GetRequiredService<UserManager<SimpleAdsUser>>();
+
+            //IdentityResult roleResult;
+            //Adding Admin Role
+            //var roleCheck = await RoleManager.RoleExistsAsync("Admin");
+            if (roleManager.Roles.Any() == false)
+            {
+                //create the roles and seed them to the database
+                await roleManager.CreateAsync(new IdentityRole("Admin"));
+                await roleManager.CreateAsync(new IdentityRole("User"));
+                var admin = new SimpleAdsUser { UserName = "admin"};
+                await userManager.CreateAsync(admin, "admin");
+            }
+            
+            //Assign Admin role to the main User here we have given our newly registered 
+            //login id for Admin management
+            //SimpleAdsUser user = await UserManager.FindByEmailAsync("syedshanumcain@gmail.com");
+            //var User = new CharshyiaUser();
+            //await UserManager.AddToRoleAsync(user, "Admin");
         }
     }
 }
