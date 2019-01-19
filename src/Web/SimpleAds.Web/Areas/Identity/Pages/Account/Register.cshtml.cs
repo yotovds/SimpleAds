@@ -69,6 +69,7 @@ namespace SimpleAds.Web.Areas.Identity.Pages.Account
             {
                 var user = new SimpleAdsUser { UserName = Input.Username };
                 var result = await _userManager.CreateAsync(user, Input.Password);
+                await this._userManager.AddToRoleAsync(user, "User");
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");

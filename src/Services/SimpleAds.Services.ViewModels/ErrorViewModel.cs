@@ -1,6 +1,8 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace SimpleAds.Web.Models
+namespace SimpleAds.Services.ViewModels
 {
     public class ErrorViewModel
     {

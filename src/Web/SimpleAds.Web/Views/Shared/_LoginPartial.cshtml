@@ -1,9 +1,25 @@
 @if (SignInManager.IsSignedIn(User))
 {
+    var currentUser = await this.UserManager.GetUserAsync(this.User);
+    var userRoles = await this.UserManager.GetRolesAsync(currentUser);
+
+    @if (await this.UserManager.IsInRoleAsync(currentUser, "User"))
+    {
+        <ul class="nav navbar-nav navbar-left">
+            <li>
+                <a asp-controller="Ads" asp-action="Create">
+                    Create Ad
+                </a>
+            </li>
+        </ul>
+    }
+
+
+
     <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                <a>Logged as: @string.Join(" ", userRoles) @UserManager.GetUserName(User)</a>
             </li>
             <li>
                 <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
