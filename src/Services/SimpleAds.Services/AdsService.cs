@@ -65,11 +65,11 @@ namespace SimpleAds.Services
             this.DbContext.SaveChanges();
         }
 
-        public async Task<AdViewModel> GetAdViewModelAsync(int adId, string userId)
+        public async Task<AdViewModel> GetAdViewModelAsync(int adId)
         {
             var ad = await this.DbContext
                 .Ads
-                .Where(a => a.Id == adId && a.AuthorId == userId)
+                .Where(a => a.Id == adId)
                 .FirstOrDefaultAsync();
 
             var viewModel = this.Mapper.Map<AdViewModel>(ad);

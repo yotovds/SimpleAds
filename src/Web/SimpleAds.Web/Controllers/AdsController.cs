@@ -48,7 +48,7 @@ namespace SimpleAds.Web.Controllers
         [Authorize(Roles = "User, Admin")]
         public async Task<IActionResult> Details(int id)
         {
-            var viewModel = await this.adsService.GetAdViewModelAsync(id, CurrentUser.Id);
+            var viewModel = await this.adsService.GetAdViewModelAsync(id);
 
             return this.View(viewModel);
         }
@@ -100,7 +100,7 @@ namespace SimpleAds.Web.Controllers
         [Authorize(Roles = "User")]
         public async Task<IActionResult> EditAd(int id)
         {
-            var viewModel = await this.adsService.GetAdViewModelAsync(id, CurrentUser.Id);
+            var viewModel = await this.adsService.GetAdViewModelAsync(id);
 
             return this.RedirectToAction("Edit", viewModel);
         }
