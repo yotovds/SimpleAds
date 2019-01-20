@@ -1,17 +1,83 @@
 ﻿@{
     var currentUser = await this.UserManager.GetUserAsync(this.User);
     var userAds = this.adService.GetUserAds(currentUser.Id).ToList();
+    var userActiveAds = userAds.Where(a => a.Status == 3 && a.ExpirationOn > DateTime.UtcNow);
+    var userPendingAds = userAds.Where(a => a.Status <= 2 && string.IsNullOrWhiteSpace(a.RejectMessage));
+    var userEpiredAds = userAds.Where(a => a.ExpirationOn < DateTime.UtcNow && a.Status == 3);
+    var userRejectedAds = userAds.Where(a => string.IsNullOrWhiteSpace(a.RejectMessage) == false);
     ViewData["Title"] = "User Home Page";
 }
 
 <div class="row">
-    @foreach (var ad in userAds)
+    @if (userActiveAds.Any())
     {
-        <a class="col-sm-2" asp-controller="Ads" asp-action="Details" asp-route-id="@ad.Id">
-            <div >
-                <img src="@ad.ImageUrl" />
-                <h6>@ad.Title</h6>
-            </div>
-        </a>
+        <h1>Active ads</h1>
+        @foreach (var ad in userActiveAds)
+        {
+            <a class="col-sm-2" asp-controller="Ads" asp-action="Details" asp-route-id="@ad.Id">
+                <div>
+                    <img class="img-thumbnail my-img" src="@ad.ImageUrl" />
+                    <h6>@ad.Title</h6>
+                </div>
+            </a>
+        }
+    }
+    else
+    {
+        <h1><a class="btn btn-primary" asp-controller="Ads" asp-action="Create">Create Ad</a></h1>
+    }
+</div>
+
+<div class="row">
+    @if (userPendingAds.Any())
+    {
+        <div class="row">
+            <h1>Pending approval ads</h1>
+            @foreach (var ad in userPendingAds)
+            {
+                <a class="col-sm-2" asp-controller="Ads" asp-action="Details" asp-route-id="@ad.Id">
+                    <div>
+                        <img class="img-thumbnail my-img" src="@ad.ImageUrl" />
+                        <h6>@ad.Title</h6>
+                    </div>
+                </a>
+            }
+        </div>
+    }
+</div>
+
+<div class="row">
+    @if (userEpiredAds.Any())
+    {
+        <div>
+            <h1>Expired Ads</h1>
+            @foreach (var ad in userEpiredAds)
+            {
+                <a class="col-sm-2" asp-controller="Ads" asp-action="Details" asp-route-id="@ad.Id">
+                    <div>
+                        <img class="img-thumbnail my-img" src="@ad.ImageUrl" />
+                        <h6>@ad.Title</h6>
+                    </div>
+                </a>
+            }
+        </div>
+    }
+</div>
+
+<div class="row">
+    @if (userRejectedAds.Any())
+    {
+        <div>
+            <h1>Rejected Ads</h1>
+            @foreach (var ad in userRejectedAds)
+            {
+                <a class="col-sm-2" asp-controller="Ads" asp-action="Details" asp-route-id="@ad.Id">
+                    <div>
+                        <img class="img-thumbnail my-img" src="@ad.ImageUrl" />
+                        <h6>@ad.Title</h6>
+                    </div>
+                </a>
+            }
+        </div>
     }
 </div>

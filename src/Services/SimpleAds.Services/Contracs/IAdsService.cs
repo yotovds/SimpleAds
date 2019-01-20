@@ -12,6 +12,20 @@ namespace SimpleAds.Services.Contracs
 
         Task<AdViewModel> GetAdViewModelAsync(int adId);
 
+        AdEditModel GetEditViewModel(AdViewModel viewModel, string userId);
+
         IEnumerable<AdViewModel> GetUserAds(string userId);
+
+        IEnumerable<AdViewModel> GetPendingAds();
+
+        void ApproveAd(int adId);
+
+        Task<int> RepostAdAsync(int id, string userId);
+
+        void DeleteAd(int id, string userId);
+
+        void RejectAd(int id, string message);
+
+        int Update(AdEditModel editModel);
     }
 }

@@ -35,3 +35,8 @@ body {
         display: none;
     }
 }
+
+img.my-img {
+    width: 150px;
+    height: 100px;
+}

@@ -1,0 +1,43 @@
+﻿@model SimpleAds.Services.ViewModels.Ads.AdEditModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div>
+    <h2>Create Ad</h2>
+    <form enctype="multipart/form-data" asp-controller="Ads" asp-action="Save" method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Title"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Content"></label>
+            <textarea asp-for="Content" class="form-control"></textarea>
+            <span asp-validation-for="Content" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Category"></label>
+            <input asp-for="Category" class="form-control" />
+            <span asp-validation-for="Category" class="text-danger"></span>
+        </div>
+        <div class="form-group">            
+            <label asp-for="Image"><img class="my-img" src="@Model.ImageUrl" /></label>
+            <input type="file" name="Image" asp-for="Image" class="form-control-file" />
+            <span asp-validation-for="Image" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <select asp-for="ExpirationAfter" class="form-control" asp-items="@new  SelectList(Enum.GetNames(typeof(SimpleAds.Services.ViewModels.Ads.Expiration)))">
+                <option selected disabled>Expiration after</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <button type="submit" name="Id" value="@Model.Id" class="btn btn-primary">Save</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

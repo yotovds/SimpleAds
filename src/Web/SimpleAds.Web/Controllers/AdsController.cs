@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SimpleAds.Data.Models;
@@ -15,11 +16,13 @@ namespace SimpleAds.Web.Controllers
     public class AdsController : BaseController
     {
         private readonly IAdsService adsService;
+        private readonly IMapper mapper;
 
-        public AdsController(UserManager<SimpleAdsUser> userManager, IAdsService adsService)
+        public AdsController(UserManager<SimpleAdsUser> userManager, IAdsService adsService, IMapper mapper)
             : base(userManager)
         {
             this.adsService = adsService;
+            this.mapper = mapper;
         }
 
         [Authorize(Roles = "User")]
@@ -42,11 +45,73 @@ namespace SimpleAds.Web.Controllers
             return this.RedirectToAction("Details", new { id = adId});
         }
 
+        [Authorize(Roles = "User, Admin")]
         public async Task<IActionResult> Details(int id)
         {
             var viewModel = await this.adsService.GetAdViewModelAsync(id);
 
             return this.View(viewModel);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public IActionResult ApproveAd(int id)
+        {
+            this.adsService.ApproveAd(id);
+
+            return this.RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public IActionResult RejectAd(int id, string message)
+        {
+            this.adsService.RejectAd(id, message);
+
+            return this.RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "User")]
+        public async Task<IActionResult> RepostAd(int id)
+        {
+            var adId = await this.adsService.RepostAdAsync(id, CurrentUser.Id);
+
+            return this.RedirectToAction("Details", new { id = adId });
+        }
+
+        [Authorize(Roles = "User, Admin")]
+        public IActionResult DeleteAd(int id)
+        {
+            this.adsService.DeleteAd(id, CurrentUser.Id);
+
+            return this.RedirectToAction("Index", "Home");
+        }
+
+        [Authorize(Roles = "User")]
+        public IActionResult Edit(AdViewModel viewModel)
+        {
+            var editModel = this.adsService.GetEditViewModel(viewModel, CurrentUser.Id);
+
+            return this.View(editModel);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "User")]
+        public async Task<IActionResult> EditAd(int id)
+        {
+            var viewModel = await this.adsService.GetAdViewModelAsync(id);
+
+            return this.RedirectToAction("Edit", viewModel);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "User")]
+        public IActionResult Save(AdEditModel editModel)
+        {
+            var adId = this.adsService.Update(editModel);
+
+            return this.RedirectToAction("Details", new { id = adId });
         }
     }
 }

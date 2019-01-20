@@ -1,6 +1,18 @@
 ﻿@{
     var currentUser = await this.UserManager.GetUserAsync(this.User);
+    var pendingApprovalAds = this.adService.GetPendingAds();
     ViewData["Title"] = "User Home Page";
 }
 
-<h1>Admin Index</h1>
+<div class="row">
+    <h1>Pending ads</h1>
+    @foreach (var ad in pendingApprovalAds.Where(a => string.IsNullOrWhiteSpace(a.RejectMessage)))
+    {
+        <a class="col-sm-2" asp-controller="Ads" asp-action="Details" asp-route-id="@ad.Id">
+            <div>
+                <img class="my-img" src="@ad.ImageUrl" />
+                <h6>@ad.Title</h6>
+            </div>
+        </a>
+    }
+</div>

@@ -32,5 +32,7 @@ namespace SimpleAds.Data.Models
         public Expiration ExpirationAfter { get; set; }
 
         public Status Status { get; set; }
+
+        public string RejectMessage { get; set; }
     }
 }

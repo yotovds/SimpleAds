@@ -16,8 +16,12 @@ namespace SimpleAds.Services.ViewModels.Ads
 
         public string ImageUrl { get; set; }
 
-        public string ExpirationOn { get; set; }
+        public DateTime ExpirationOn { get; set; }
 
         public int Status { get; set; }
+
+        public string AuthorId { get; set; }
+
+        public string RejectMessage { get; set; }
     }
 }

@@ -63,9 +63,17 @@ namespace SimpleAds.Web
             {
                 configuration.CreateMap<CreateAdInputModel, Ad>();
                 configuration.CreateMap<Ad, AdViewModel>();
+                configuration.CreateMap<AdViewModel, CreateAdInputModel>();
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = $"/Identity/Account/Login";
+                //options.LogoutPath = $"/Identity/Account/Logout";
+                //options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+            });
 
             services.AddScoped<IAdsService, AdsService>();
         }
