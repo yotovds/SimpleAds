@@ -27,5 +27,7 @@ namespace SimpleAds.Services.Contracs
         void RejectAd(int id, string message);
 
         int Update(AdEditModel editModel, string userId);
+
+        IEnumerable<AdViewModel> GetAllActiveAds();
     }
 }

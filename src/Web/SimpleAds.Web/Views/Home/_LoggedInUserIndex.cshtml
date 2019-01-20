@@ -7,6 +7,12 @@
     var userRejectedAds = userAds.Where(a => string.IsNullOrWhiteSpace(a.RejectMessage) == false);
     ViewData["Title"] = "User Home Page";
 }
+<div >
+    <form class="form-inline" asp-controller="Search" asp-action="Search" method="post">
+        <input class="form-control  my-search" name="adName" type="text" placeholder="Search by ad title..." />        
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
 
 <div class="row">
     @if (userActiveAds.Any())

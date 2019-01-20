@@ -77,6 +77,17 @@ namespace SimpleAds.Services
             return viewModel;
         }
 
+        public IEnumerable<AdViewModel> GetAllActiveAds()
+        {
+            var ads = this.DbContext
+                .Ads
+                .Where(a => a.Status == Status.Approved);
+
+            var adsViewModel = this.Mapper.Map<IEnumerable<AdViewModel>>(ads);
+
+            return adsViewModel;
+        }
+
         public AdEditModel GetEditViewModel(AdViewModel viewModel, string userId)
         {
             if (viewModel.AuthorId == userId)

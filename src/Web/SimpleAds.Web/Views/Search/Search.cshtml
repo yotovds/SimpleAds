@@ -1,0 +1,29 @@
+﻿@{
+    var results = (IEnumerable<SimpleAds.Services.ViewModels.Ads.AdViewModel>)this.ViewData["results"];
+    ViewData["Title"] = "Search";
+}
+
+<div>
+    <form class="form-inline" asp-controller="Search" asp-action="Search" method="post">
+        <input class="form-control  my-search" name="adName" type="text" placeholder="Search by ad title..." />
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+
+@if (results != null)
+{
+    <h1>Search results</h1>
+    @foreach (var ad in results.ToList())
+    {
+        <a class="col-sm-2" asp-controller="Ads" asp-action="Details" asp-route-id="@ad.Id">
+            <div>
+                <img class="img-thumbnail my-img" src="@ad.ImageUrl" />
+                <h6>@ad.Title</h6>
+            </div>
+        </a>
+    }
+}
+else
+{
+    <h3>Search result is empty.</h3>
+}
