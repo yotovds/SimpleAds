@@ -5,13 +5,34 @@
     var userPendingAds = userAds.Where(a => a.Status <= 2 && string.IsNullOrWhiteSpace(a.RejectMessage));
     var userEpiredAds = userAds.Where(a => a.ExpirationOn < DateTime.UtcNow && a.Status == 3);
     var userRejectedAds = userAds.Where(a => string.IsNullOrWhiteSpace(a.RejectMessage) == false);
+    var newAds = this.adService.GetAllActiveAds().Take(10);
     ViewData["Title"] = "User Home Page";
 }
-<div >
+<div>
     <form class="form-inline" asp-controller="Search" asp-action="Search" method="post">
-        <input class="form-control  my-search" name="adName" type="text" placeholder="Search by ad title..." />        
+        <input class="form-control  my-search" name="adName" type="text" placeholder="Search by ad title..." />
         <button type="submit" class="btn btn-primary">Search</button>
     </form>
+</div>
+
+<div class="row">
+    @if (newAds.Any())
+    {
+        <h1>Last 10 ads</h1>
+        @foreach (var ad in newAds)
+        {
+            <a class="col-sm-2" asp-controller="Ads" asp-action="Details" asp-route-id="@ad.Id">
+                <div>
+                    <img class="img-thumbnail my-img" src="@ad.ImageUrl" />
+                    <h6>@ad.Title</h6>
+                </div>
+            </a>
+        }
+    }
+    else
+    {
+        <h3>No ads in database</h3>
+    }
 </div>
 
 <div class="row">

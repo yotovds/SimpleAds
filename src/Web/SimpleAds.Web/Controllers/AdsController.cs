@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GlobalConstans;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -25,14 +26,14 @@ namespace SimpleAds.Web.Controllers
             this.mapper = mapper;
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = StringConstants.UserRole)]
         public IActionResult Create()
         {
             return this.View();
         }
-
-        [Authorize(Roles = "User")]
+                
         [HttpPost]
+        [Authorize(Roles = StringConstants.UserRole)]
         public async Task<IActionResult> Create(CreateAdInputModel inputModel)
         {
             if (this.ModelState.IsValid == false)
@@ -45,7 +46,7 @@ namespace SimpleAds.Web.Controllers
             return this.RedirectToAction("Details", new { id = adId});
         }
 
-        [Authorize(Roles = "User, Admin")]
+        [Authorize(Roles = StringConstants.UserRole + ", " + StringConstants.AdminRole)]
         public async Task<IActionResult> Details(int id)
         {
             var viewModel = await this.adsService.GetAdViewModelAsync(id);
@@ -54,7 +55,7 @@ namespace SimpleAds.Web.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = StringConstants.AdminRole)]
         public IActionResult ApproveAd(int id)
         {
             this.adsService.ApproveAd(id);
@@ -63,7 +64,7 @@ namespace SimpleAds.Web.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = StringConstants.AdminRole)]
         public IActionResult RejectAd(int id, string message)
         {
             this.adsService.RejectAd(id, message);
@@ -72,15 +73,15 @@ namespace SimpleAds.Web.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = StringConstants.UserRole)]
         public async Task<IActionResult> RepostAd(int id)
         {
             var adId = await this.adsService.RepostAdAsync(id, CurrentUser.Id);
 
-            return this.RedirectToAction("Details", new { id = adId });
+            return this.RedirectToAction("Index", "Home");
         }
 
-        [Authorize(Roles = "User, Admin")]
+        [Authorize(Roles = StringConstants.UserRole + ", " + StringConstants.AdminRole)]
         public IActionResult DeleteAd(int id)
         {
             this.adsService.DeleteAd(id, CurrentUser.Id);
@@ -88,7 +89,7 @@ namespace SimpleAds.Web.Controllers
             return this.RedirectToAction("Index", "Home");
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = StringConstants.UserRole)]
         public IActionResult Edit(AdViewModel viewModel)
         {
             var editModel = this.adsService.GetEditViewModel(viewModel, CurrentUser.Id);
@@ -97,7 +98,7 @@ namespace SimpleAds.Web.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = StringConstants.UserRole)]
         public async Task<IActionResult> EditAd(int id)
         {
             var viewModel = await this.adsService.GetAdViewModelAsync(id);
@@ -106,7 +107,7 @@ namespace SimpleAds.Web.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = StringConstants.UserRole)]
         public IActionResult Save(AdEditModel editModel)
         {
             var adId = this.adsService.Update(editModel, CurrentUser.Id);

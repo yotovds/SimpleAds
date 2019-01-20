@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
+using GlobalConstans;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using SimpleAds.Data;
@@ -203,7 +204,7 @@ namespace SimpleAds.Services
 
         private string UploadImage(IFormFile image)
         {
-            string imageUrl = "https://res.cloudinary.com/dr8axwivq/image/upload/v1546794753/test.jpg";
+            string imageUrl = StringConstants.DefaultImgUrl;
             if (image != null)
             {
                 Account account = new Account("dr8axwivq", "766763689436115", "I9KoG0cgt3QoCd3Dp2K2QpHMpsM");

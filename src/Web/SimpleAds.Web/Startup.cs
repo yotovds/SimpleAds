@@ -17,6 +17,7 @@ using SimpleAds.Data;
 using SimpleAds.Services.ViewModels.Ads;
 using SimpleAds.Services;
 using SimpleAds.Services.Contracs;
+using GlobalConstans;
 
 namespace SimpleAds.Web
 {
@@ -41,7 +42,7 @@ namespace SimpleAds.Web
 
             services.AddDbContext<SimpleAdsDbContext>(options =>
                     options.UseSqlServer(
-                        this.Configuration.GetConnectionString("DefaultConnection")));
+                        this.Configuration.GetConnectionString(StringConstants.ConnectioString)));
 
             services.AddIdentity<SimpleAdsUser, IdentityRole>()
                 .AddEntityFrameworkStores<SimpleAdsDbContext>();
@@ -70,9 +71,7 @@ namespace SimpleAds.Web
 
             services.ConfigureApplicationCookie(options =>
             {
-                options.LoginPath = $"/Identity/Account/Login";
-                //options.LogoutPath = $"/Identity/Account/Logout";
-                //options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+                options.LoginPath = StringConstants.DefaultLoginPath;
             });
 
             services.AddScoped<IAdsService, AdsService>();
@@ -114,24 +113,15 @@ namespace SimpleAds.Web
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var userManager = serviceProvider.GetRequiredService<UserManager<SimpleAdsUser>>();
 
-            //IdentityResult roleResult;
-            //Adding Admin Role
-            //var roleCheck = await RoleManager.RoleExistsAsync("Admin");
             if (roleManager.Roles.Any() == false)
             {
                 //create the roles and seed them to the database
-                await roleManager.CreateAsync(new IdentityRole("Admin"));
-                await roleManager.CreateAsync(new IdentityRole("User"));
+                await roleManager.CreateAsync(new IdentityRole(StringConstants.AdminRole));
+                await roleManager.CreateAsync(new IdentityRole(StringConstants.UserRole));
                 var admin = new SimpleAdsUser { UserName = "admin"};
                 await userManager.CreateAsync(admin, "admin");
-                await userManager.AddToRoleAsync(admin, "Admin");
+                await userManager.AddToRoleAsync(admin, StringConstants.AdminRole);
             }
-            
-            //Assign Admin role to the main User here we have given our newly registered 
-            //login id for Admin management
-            //SimpleAdsUser user = await UserManager.FindByEmailAsync("syedshanumcain@gmail.com");
-            //var User = new CharshyiaUser();
-            //await UserManager.AddToRoleAsync(user, "Admin");
         }
     }
 }

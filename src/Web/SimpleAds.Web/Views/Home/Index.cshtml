@@ -6,12 +6,12 @@
 {
     var currentUser = await this.UserManager.GetUserAsync(this.User);
 
-    @if (await this.UserManager.IsInRoleAsync(currentUser, "User"))
+    @if (await this.UserManager.IsInRoleAsync(currentUser, GlobalConstans.StringConstants.UserRole))
     {
         <partial name="_LoggedInUserIndex" />
     }
 
-    @if (await this.UserManager.IsInRoleAsync(currentUser, "Admin"))
+    @if (await this.UserManager.IsInRoleAsync(currentUser, GlobalConstans.StringConstants.AdminRole))
     {
         <partial name="_LoggedInAdminIndex" />
     }

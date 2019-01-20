@@ -1,8 +1,8 @@
 ﻿@model SimpleAds.Services.ViewModels.Ads.AdViewModel
 @{
     var currentUser = await this.UserManager.GetUserAsync(this.User);
-    var userIsAdmin = await this.UserManager.IsInRoleAsync(currentUser, "Admin");
-    var userIsAuthor = Model.AuthorId == currentUser.Id && await this.UserManager.IsInRoleAsync(currentUser, "User");
+    var userIsAdmin = await this.UserManager.IsInRoleAsync(currentUser, GlobalConstans.StringConstants.AdminRole);
+    var userIsAuthor = Model.AuthorId == currentUser.Id && await this.UserManager.IsInRoleAsync(currentUser, GlobalConstans.StringConstants.UserRole);
     ViewData["Title"] = "Details";
 }
 
@@ -20,20 +20,23 @@
     <div>
         <p>Category: @Model.Category</p>
     </div>
-    @switch (Model.Status)
+    @if (userIsAuthor)
     {
-        case 1:
-            <p>Status: Your ad is created.</p>
-            break;
-        case 2:
-            <p>Status: Your ad is pending approval by Admin.</p>
-            break;
-        case 3:
-            <p>Status: Your ad is opproved by Admin. Active.</p>
-            break;
-        case 4:
-            <p>Your ad is edited and pending approval by Admin.</p>
-            break;
+        @switch (Model.Status)
+        {
+            case 1:
+                <p>Status: Your ad is created.</p>
+                break;
+            case 2:
+                <p>Status: Your ad is pending approval by Admin.</p>
+                break;
+            case 3:
+                <p>Status: Your ad is opproved by Admin. Active.</p>
+                break;
+            case 4:
+                <p>Your ad is edited and pending approval by Admin.</p>
+                break;
+        }
     }
     <div>
         <p>Expired on: @Model.ExpirationOn</p>

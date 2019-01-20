@@ -3,7 +3,7 @@
     var currentUser = await this.UserManager.GetUserAsync(this.User);
     var userRoles = await this.UserManager.GetRolesAsync(currentUser);
 
-    @if (await this.UserManager.IsInRoleAsync(currentUser, "User"))
+    @if (await this.UserManager.IsInRoleAsync(currentUser, GlobalConstans.StringConstants.UserRole))
     {
         <ul class="nav navbar-nav navbar-left">
             <li>

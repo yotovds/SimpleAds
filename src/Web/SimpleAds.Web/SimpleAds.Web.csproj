@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\GlobalConstans\GlobalConstans.csproj" />
     <ProjectReference Include="..\..\Data\SimpleAds.Data\SimpleAds.Data.csproj" />
     <ProjectReference Include="..\..\Services\SimpleAds.Services.ViewModels\SimpleAds.Services.ViewModels.csproj" />
     <ProjectReference Include="..\..\Services\SimpleAds.Services\SimpleAds.Services.csproj" />
