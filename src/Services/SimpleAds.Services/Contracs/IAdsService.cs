@@ -10,7 +10,7 @@ namespace SimpleAds.Services.Contracs
     {
         Task<int> CreateAdAsync(CreateAdInputModel inputModel, string userId);
 
-        Task<AdViewModel> GetAdViewModelAsync(int adId);
+        Task<AdViewModel> GetAdViewModelAsync(int adId, string userId);
 
         AdEditModel GetEditViewModel(AdViewModel viewModel, string userId);
 
@@ -26,6 +26,6 @@ namespace SimpleAds.Services.Contracs
 
         void RejectAd(int id, string message);
 
-        int Update(AdEditModel editModel);
+        int Update(AdEditModel editModel, string userId);
     }
 }
