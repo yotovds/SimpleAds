@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SimpleAds.Services.ViewModels.Enums
+namespace SimpleAds.Data.Models.Enums
 {
     public enum Expiration
     {

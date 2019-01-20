@@ -1,0 +1,17 @@
+﻿@{
+    var currentUser = await this.UserManager.GetUserAsync(this.User);
+    var userAds = this.adService.GetUserAds(currentUser.Id).ToList();
+    ViewData["Title"] = "User Home Page";
+}
+
+<div class="row">
+    @foreach (var ad in userAds)
+    {
+        <a class="col-sm-2" asp-controller="Ads" asp-action="Details" asp-route-id="@ad.Id">
+            <div >
+                <img src="@ad.ImageUrl" />
+                <h6>@ad.Title</h6>
+            </div>
+        </a>
+    }
+</div>

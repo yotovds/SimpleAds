@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using Microsoft.AspNetCore.Http;
-using SimpleAds.Services.ViewModels.Enums;
 
 namespace SimpleAds.Services.ViewModels.Ads
 {
@@ -32,4 +31,11 @@ namespace SimpleAds.Services.ViewModels.Ads
         [Display(Name = "Expiration After")]
         public Expiration ExpirationAfter { get; set; }
     }    
+
+    public enum Expiration
+    {
+        Day = 1,
+        Week = 2,
+        Month = 3
+    }
 }

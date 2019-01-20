@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SimpleAds.Data.Models;
-using System;
 
 namespace SimpleAds.Data
 {
@@ -11,8 +10,6 @@ namespace SimpleAds.Data
             : base(options)
         {
         }
-
-        public DbSet<PendingAd> PendingAds { get; set; }
 
         public DbSet<Ad> Ads { get; set; }
 

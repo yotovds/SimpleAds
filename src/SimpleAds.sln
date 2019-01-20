@@ -5,19 +5,19 @@ VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{C61EFA13-3EE3-4CF4-BD32-A90ED1575ED0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleAds.Web", "Web\SimpleAds.Web\SimpleAds.Web.csproj", "{D71728FD-0245-4910-B9B4-ED02B659DF4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleAds.Web", "Web\SimpleAds.Web\SimpleAds.Web.csproj", "{D71728FD-0245-4910-B9B4-ED02B659DF4A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{0E17BF07-25A6-44F6-AE53-45DB53F04D9C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleAds.Data", "Data\SimpleAds.Data\SimpleAds.Data.csproj", "{D8D86C22-CC55-4700-92CC-4258D9071E83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleAds.Data", "Data\SimpleAds.Data\SimpleAds.Data.csproj", "{D8D86C22-CC55-4700-92CC-4258D9071E83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleAds.Data.Models", "Data\SimpleAds.Data.Models\SimpleAds.Data.Models.csproj", "{60265799-33B9-41AA-BCE2-08DA939CB13B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleAds.Data.Models", "Data\SimpleAds.Data.Models\SimpleAds.Data.Models.csproj", "{60265799-33B9-41AA-BCE2-08DA939CB13B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{742E39BE-82FB-458E-82FA-BEE3EA131085}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleAds.Services", "Services\SimpleAds.Services\SimpleAds.Services.csproj", "{D1E13878-F96F-4CA2-96E2-72B7E2F0B37B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleAds.Services", "Services\SimpleAds.Services\SimpleAds.Services.csproj", "{D1E13878-F96F-4CA2-96E2-72B7E2F0B37B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleAds.Services.ViewModels", "Services\SimpleAds.Services.ViewModels\SimpleAds.Services.ViewModels.csproj", "{ACCCFC86-5AC3-4FE3-8A0A-E798B71C0F90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleAds.Services.ViewModels", "Services\SimpleAds.Services.ViewModels\SimpleAds.Services.ViewModels.csproj", "{ACCCFC86-5AC3-4FE3-8A0A-E798B71C0F90}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

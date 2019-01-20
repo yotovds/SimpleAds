@@ -61,7 +61,8 @@ namespace SimpleAds.Web
 
             services.AddAutoMapper(configuration =>
             {
-                configuration.CreateMap<CreateAdInputModel, PendingAd>();
+                configuration.CreateMap<CreateAdInputModel, Ad>();
+                configuration.CreateMap<Ad, AdViewModel>();
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

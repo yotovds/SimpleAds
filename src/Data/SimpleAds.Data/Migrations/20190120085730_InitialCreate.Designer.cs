@@ -10,7 +10,7 @@ using SimpleAds.Data;
 namespace SimpleAds.Data.Migrations
 {
     [DbContext(typeof(SimpleAdsDbContext))]
-    [Migration("20190119170831_InitialCreate")]
+    [Migration("20190120085730_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -137,52 +137,31 @@ namespace SimpleAds.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AdCreatorId")
+                    b.Property<string>("AuthorId")
                         .IsRequired();
 
                     b.Property<string>("Category");
 
                     b.Property<string>("Content");
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<int>("ExpirationAfter");
 
                     b.Property<DateTime>("ExpirationOn");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired();
 
+                    b.Property<int>("Status");
+
                     b.Property<string>("Title");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AdCreatorId");
+                    b.HasIndex("AuthorId");
 
                     b.ToTable("Ads");
-                });
-
-            modelBuilder.Entity("SimpleAds.Data.Models.PendingAd", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AdCreatorId")
-                        .IsRequired();
-
-                    b.Property<string>("Category");
-
-                    b.Property<string>("Content");
-
-                    b.Property<int>("ExpirationAfter");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired();
-
-                    b.Property<string>("Title");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AdCreatorId");
-
-                    b.ToTable("PendingAds");
                 });
 
             modelBuilder.Entity("SimpleAds.Data.Models.SimpleAdsUser", b =>
@@ -283,17 +262,9 @@ namespace SimpleAds.Data.Migrations
 
             modelBuilder.Entity("SimpleAds.Data.Models.Ad", b =>
                 {
-                    b.HasOne("SimpleAds.Data.Models.SimpleAdsUser", "AdCreator")
+                    b.HasOne("SimpleAds.Data.Models.SimpleAdsUser", "Author")
                         .WithMany()
-                        .HasForeignKey("AdCreatorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("SimpleAds.Data.Models.PendingAd", b =>
-                {
-                    b.HasOne("SimpleAds.Data.Models.SimpleAdsUser", "AdCreator")
-                        .WithMany()
-                        .HasForeignKey("AdCreatorId")
+                        .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

@@ -39,7 +39,14 @@ namespace SimpleAds.Web.Controllers
 
             var adId = await this.adsService.CreateAdAsync(inputModel, CurrentUser.Id);
 
-            return this.View();
+            return this.RedirectToAction("Details", new { id = adId});
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var viewModel = await this.adsService.GetAdViewModelAsync(id);
+
+            return this.View(viewModel);
         }
     }
 }

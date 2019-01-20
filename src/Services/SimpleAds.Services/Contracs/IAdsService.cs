@@ -9,5 +9,9 @@ namespace SimpleAds.Services.Contracs
     public interface IAdsService
     {
         Task<int> CreateAdAsync(CreateAdInputModel inputModel, string userId);
+
+        Task<AdViewModel> GetAdViewModelAsync(int adId);
+
+        IEnumerable<AdViewModel> GetUserAds(string userId);
     }
 }

@@ -1,4 +1,23 @@
-﻿@{
+﻿@{    
     ViewData["Title"] = "Home Page";
 }
 
+@if (SignInManager.IsSignedIn(User))
+{
+    var currentUser = await this.UserManager.GetUserAsync(this.User);
+
+    @if (await this.UserManager.IsInRoleAsync(currentUser, "User"))
+    {
+        <partial name="_LoggedInUserIndex" />
+    }
+
+    @if (await this.UserManager.IsInRoleAsync(currentUser, "Admin"))
+    {
+        <partial name="_LoggedInAdminIndex" />
+    }
+
+}
+else
+{
+    <partial name="_GuestIndex" />
+}

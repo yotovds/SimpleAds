@@ -3,7 +3,9 @@
 @using Microsoft.AspNetCore.Identity
 @using SimpleAds.Data.Models
 @using System.Linq
+@using SimpleAds.Services.Contracs
 
 @inject SignInManager<SimpleAdsUser> SignInManager
 @inject UserManager<SimpleAdsUser> UserManager
+@inject IAdsService adService
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
