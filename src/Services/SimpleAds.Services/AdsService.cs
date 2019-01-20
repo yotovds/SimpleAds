@@ -82,7 +82,7 @@ namespace SimpleAds.Services
         {
             var ads = this.DbContext
                 .Ads
-                .Where(a => a.Status == Status.Approved);
+                .Where(a => a.Status == Status.Approved && a.ExpirationOn > DateTime.UtcNow);
 
             var adsViewModel = this.Mapper.Map<IEnumerable<AdViewModel>>(ads);
 
